@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spanish 1 — Unit 2 (2A & 2B) Me Gusta Mi Escuela Interactive Practice</title>
+  <style>
+    /* ==========================================================================
+       CSS VARIABLES & THEME TOKENS
+       Self-contained system typography & accessible classroom palette
+       ========================================================================== */
+    :root {
+      --bg-page: #f4f6fb;
+      --bg-card: #ffffff;
+      --bg-subtle: #f8fafc;
+      --bg-accent-btn: #eef2ff;
+      --bg-accent-btn-hover: #e0e7ff;
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --border-color: #cbd5e1;
+      --border-light: #e2e8f0;
+      --primary: #3b5bfd;
+      --primary-hover: #2b47e0;
+      --primary-light: #eef2ff;
+      --success: #0d9488;
+      --success-bg: #f0fdfa;
+      --success-border: #99f6e4;
+      --warning: #d97706;
+      --warning-bg: #fffbeb;
+      --warning-border: #fde68a;
+      --error: #dc2626;
+      --error-bg: #fef2f2;
+      --error-border: #fecaca;
+      --mode-a-color: #2563eb;
+      --mode-a-bg: #eff6ff;
+      --mode-b-color: #7c3aed;
+      --mode-b-bg: #f5f3ff;
+      --mode-c-color: #059669;
+      --mode-c-bg: #ecfdf5;
+      --mode-d-color: #b45309;
+      --mode-d-bg: #fffbeb;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 6px 20px rgba(15, 23, 42, 0.08);
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --radius-sm: 8px;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      line-height: 1.45;
+      padding: 12px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    /* ==========================================================================
+       HEADER & GLOBAL CONTROLS
+       ========================================================================== */
+    .top-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .app-title-group h1 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .app-title-group p {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+
+    .global-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .btn-control {
+      font-family: inherit;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-control:hover {
+      border-color: var(--primary);
+      background-color: var(--bg-subtle);
+    }
+
+    .btn-control.active-mode {
+      background-color: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* ==========================================================================
+       5 ACTIVITY MODE BUTTONS (ALL + 4 TARGETED MODES)
+       ========================================================================== */
+    .mode-bar {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .mode-btn {
+      font-family: inherit;
+      font-size: 0.73rem;
+      font-weight: 700;
+      padding: 6px 5px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-card);
+      color: var(--text-secondary);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1px;
+    }
+
+    .mode-btn span.mode-sub {
+      font-size: 0.63rem;
+      font-weight: 600;
+      opacity: 0.85;
+    }
+
+    .mode-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .mode-btn.active {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(59, 91, 253, 0.25);
+    }
+
+    /* ==========================================================================
+       STATISTICS DASHBOARD (4 CARDS)
+       ========================================================================== */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 7px 8px;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+    }
+
+    .stat-label {
+      font-size: 0.64rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--text-muted);
+      margin-bottom: 1px;
+    }
+
+    .stat-value {
+      font-size: 1.06rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .stat-value.highlight-primary {
+      color: var(--primary);
+    }
+
+    .stat-value.highlight-success {
+      color: var(--success);
+    }
+
+    .stat-sub {
+      font-size: 0.68rem;
+      color: var(--text-secondary);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background-color: var(--border-light);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), #6366f1);
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+
+    /* ==========================================================================
+       MAIN FLASHCARD AREA
+       ========================================================================== */
+    .flashcard {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 15px 18px;
+      position: relative;
+      transition: border-color 0.2s ease;
+    }
+
+    .flashcard.state-correct {
+      border-color: var(--success);
+    }
+
+    .flashcard.state-incorrect {
+      border-color: var(--error);
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 9px;
+      font-size: 0.77rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .meta-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .badge-mode {
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 0.70rem;
+      font-weight: 800;
+    }
+
+    .badge-mode.mode-vocab {
+      background-color: var(--mode-a-bg);
+      color: var(--mode-a-color);
+    }
+
+    .badge-mode.mode-ordinal {
+      background-color: var(--mode-b-bg);
+      color: var(--mode-b-color);
+    }
+
+    .badge-mode.mode-location {
+      background-color: var(--mode-c-bg);
+      color: var(--mode-c-color);
+    }
+
+    .badge-mode.mode-plurals {
+      background-color: var(--mode-d-bg);
+      color: var(--mode-d-color);
+    }
+
+    .badge-topic {
+      background-color: #f1f5f9;
+      color: var(--text-secondary);
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 0.70rem;
+      font-weight: 700;
+    }
+
+    .badge-attempt {
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 0.70rem;
+      font-weight: 700;
+    }
+
+    .badge-attempt.first-try {
+      background-color: #f1f5f9;
+      color: var(--text-secondary);
+    }
+
+    .badge-attempt.retry {
+      background-color: var(--warning-bg);
+      color: var(--warning);
+      border: 1px solid var(--warning-border);
+    }
+
+    .badge-attempt.mastered-first {
+      background-color: var(--success-bg);
+      color: var(--success);
+      border: 1px solid var(--success-border);
+    }
+
+    .task-instruction {
+      text-align: center;
+      font-size: 0.81rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .prompt-box {
+      font-size: 1.22rem;
+      font-weight: 800;
+      line-height: 1.48;
+      color: var(--text-primary);
+      text-align: center;
+      padding: 12px 14px;
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      margin-bottom: 10px;
+    }
+
+    .prompt-sub-note {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-top: 3px;
+    }
+
+    .hint-row {
+      text-align: center;
+      margin-bottom: 9px;
+    }
+
+    .btn-hint {
+      font-family: inherit;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      border: 1px solid #c7d2fe;
+      border-radius: 999px;
+      padding: 3px 11px;
+      cursor: pointer;
+    }
+
+    .btn-hint:hover {
+      background: #e0e7ff;
+    }
+
+    .hint-text {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      padding: 3px 10px;
+      border-radius: 8px;
+      margin-left: 6px;
+    }
+
+    /* ==========================================================================
+       MULTIPLE CHOICE OPTIONS GRID (2x2)
+       ========================================================================== */
+    .mc-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .mc-option {
+      font-family: inherit;
+      font-size: 0.94rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      background-color: var(--bg-card);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      cursor: pointer;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      transition: all 0.13s ease;
+    }
+
+    .mc-option:hover:not(:disabled) {
+      border-color: var(--primary);
+      background-color: var(--primary-light);
+    }
+
+    .mc-key {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 23px;
+      height: 23px;
+      border-radius: 6px;
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+    }
+
+    .mc-option.opt-correct {
+      background-color: var(--success-bg);
+      border-color: var(--success);
+      color: #0f766e;
+    }
+
+    .mc-option.opt-correct .mc-key {
+      background-color: var(--success);
+      border-color: var(--success);
+      color: #ffffff;
+    }
+
+    .mc-option.opt-wrong {
+      background-color: var(--error-bg);
+      border-color: var(--error);
+      color: #b91c1c;
+    }
+
+    .mc-option.opt-wrong .mc-key {
+      background-color: var(--error);
+      border-color: var(--error);
+      color: #ffffff;
+    }
+
+    .mc-option:disabled {
+      cursor: default;
+    }
+
+    /* ==========================================================================
+       TYPING MODE INPUT & SPANISH LANGUAGE KEYBOARD TOOLBAR
+       ========================================================================== */
+    .typing-area {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 11px;
+    }
+
+    .typing-area.visible {
+      display: flex;
+    }
+
+    .type-input {
+      font-family: inherit;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      background-color: var(--bg-subtle);
+      border: 2px solid var(--primary);
+      border-radius: var(--radius-md);
+      padding: 8px 13px;
+      width: 100%;
+      max-width: 440px;
+      text-align: center;
+      margin-bottom: 7px;
+      transition: all 0.15s ease;
+    }
+
+    .type-input:focus {
+      outline: none;
+      background-color: #eef2ff;
+      box-shadow: 0 3px 10px rgba(59, 91, 253, 0.15);
+    }
+
+    .type-input.input-correct {
+      background-color: var(--success-bg);
+      border-color: var(--success);
+      color: var(--success);
+    }
+
+    .type-input.input-incorrect {
+      background-color: var(--error-bg);
+      border-color: var(--error);
+      color: var(--error);
+    }
+
+    .accent-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .accent-btn {
+      font-family: inherit;
+      font-size: 0.96rem;
+      font-weight: 800;
+      min-width: 34px;
+      height: 32px;
+      padding: 0 8px;
+      border-radius: var(--radius-sm);
+      border: 1px solid #c7d2fe;
+      background-color: var(--bg-accent-btn);
+      color: var(--primary);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .accent-btn:hover {
+      background-color: var(--bg-accent-btn-hover);
+      border-color: var(--primary);
+    }
+
+    /* ==========================================================================
+       FEEDBACK BANNER & ACTION BUTTONS
+       ========================================================================== */
+    .feedback-banner {
+      display: none;
+      padding: 8px 13px;
+      border-radius: var(--radius-md);
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-align: center;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .feedback-banner.visible {
+      display: block;
+    }
+
+    .feedback-banner.success {
+      background-color: var(--success-bg);
+      color: #0f766e;
+      border: 1px solid var(--success-border);
+    }
+
+    .feedback-banner.warning {
+      background-color: var(--warning-bg);
+      color: #b45309;
+      border: 1px solid var(--warning-border);
+    }
+
+    .feedback-banner.error {
+      background-color: var(--error-bg);
+      color: #b91c1c;
+      border: 1px solid var(--error-border);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn {
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: #ffffff;
+      min-width: 126px;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-success {
+      background-color: var(--success);
+      color: #ffffff;
+      min-width: 126px;
+    }
+
+    .btn-success:hover:not(:disabled) {
+      background-color: #0f766e;
+    }
+
+    .btn-secondary {
+      background-color: var(--bg-subtle);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background-color: var(--border-light);
+    }
+
+    .keyboard-tip {
+      text-align: center;
+      font-size: 0.71rem;
+      color: var(--text-muted);
+      margin-top: 7px;
+    }
+
+    kbd {
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-family: inherit;
+      font-size: 0.67rem;
+      font-weight: 700;
+    }
+
+    /* ==========================================================================
+       END OF DECK SUMMARY SCREEN
+       ========================================================================== */
+    .summary-screen {
+      display: none;
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 22px 18px;
+      text-align: center;
+    }
+
+    .summary-screen.visible {
+      display: block;
+    }
+
+    .summary-screen h2 {
+      font-size: 1.32rem;
+      margin-bottom: 6px;
+    }
+
+    .summary-screen p {
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      font-size: 0.89rem;
+    }
+
+    .summary-score-ring {
+      width: 108px;
+      height: 108px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      border: 5px solid var(--primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+    }
+
+    .summary-score-ring .big-pct {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+
+    .summary-score-ring .ring-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .summary-breakdown {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .breakdown-pill {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 7px 12px;
+      font-size: 0.81rem;
+      font-weight: 600;
+    }
+
+    @media (max-width: 680px) {
+      .mode-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .mc-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .prompt-box {
+        font-size: 1.08rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Header & Global Controls -->
+    <header class="top-bar">
+      <div class="app-title-group">
+        <h1>Spanish 1 — Unit 2: Me Gusta Mi Escuela (2A &amp; 2B)</h1>
+        <p>Classes, school supplies, classroom objects, ordinal numbers, prepositions &amp; plurals.</p>
+      </div>
+      <div class="global-actions">
+        <button type="button" id="btnInputMode" class="btn-control" title="Switch between Multiple Choice and Typing">
+          🔤 Mode: Multiple Choice
+        </button>
+        <button type="button" id="btnShuffle" class="btn-control active-mode" title="Shuffle deck">
+          🔀 Shuffle: On
+        </button>
+        <button type="button" id="btnPracticeMissed" class="btn-control" style="display: none;" title="Practice cards missed on the first attempt">
+          🎯 Missed (<span id="missedCountBadge">0</span>)
+        </button>
+        <button type="button" id="btnReset" class="btn-control" title="Reset progress">
+          ↺ Reset
+        </button>
+      </div>
+    </header>
+
+    <!-- 5 Activity Modes -->
+    <section class="mode-bar" id="modeBar" aria-label="Activity mode">
+      <button type="button" class="mode-btn active" data-mode="ALL">
+        <span>All Activities</span>
+        <span class="mode-sub">Mixed Review (88)</span>
+      </button>
+      <button type="button" class="mode-btn" data-mode="vocab">
+        <span>A. Core Vocab</span>
+        <span class="mode-sub">Classes &amp; Objects</span>
+      </button>
+      <button type="button" class="mode-btn" data-mode="ordinal">
+        <span>B. Ordinal Numbers</span>
+        <span class="mode-sub">1st – 10th + Agreement</span>
+      </button>
+      <button type="button" class="mode-btn" data-mode="location">
+        <span>C. Location &amp; Estar</span>
+        <span class="mode-sub">Prepositions in Context</span>
+      </button>
+      <button type="button" class="mode-btn" data-mode="plurals">
+        <span>D. Plurals &amp; Articles</span>
+        <span class="mode-sub">el/la/un/una → plural</span>
+      </button>
+    </section>
+
+    <!-- Live Performance Dashboard -->
+    <section class="stats-grid" aria-label="Progress statistics">
+      <div class="stat-card">
+        <div class="stat-label">Score on First Attempt</div>
+        <div class="stat-value highlight-primary" id="statFirstTryPct">—</div>
+        <div class="stat-sub" id="statFirstTryFraction">0 of 0 attempted</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Completed</div>
+        <div class="stat-value" id="statCompleted">0 / 0</div>
+        <div class="stat-sub" id="statRemaining">0 remaining</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Current Streak</div>
+        <div class="stat-value highlight-success" id="statStreak">0</div>
+        <div class="stat-sub" id="statBestStreak">Best: 0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Actual Score</div>
+        <div class="stat-value" id="statActualScore">—</div>
+        <div class="stat-sub" id="statActualFraction">0 of 0 correct</div>
+      </div>
+    </section>
+
+    <!-- Visual Progress Bar -->
+    <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBarTrack">
+      <div class="progress-fill" id="progressBarFill"></div>
+    </div>
+
+    <!-- Main Flashcard Interface -->
+    <main class="flashcard" id="flashcardBox">
+      <div class="card-meta">
+        <div class="meta-left">
+          <span class="badge-mode mode-vocab" id="cardModeBadge">A. Core Vocab</span>
+          <span class="badge-topic" id="cardTopicBadge">Unit 2A / 2B</span>
+          <span id="cardCounterText">Card 1 of 88</span>
+        </div>
+        <span class="badge-attempt first-try" id="cardAttemptBadge">First Attempt</span>
+      </div>
+
+      <div class="task-instruction" id="taskInstruction">
+        Choose or type the Spanish translation (include el / la where shown):
+      </div>
+
+      <div class="prompt-box" id="promptContainer"></div>
+
+      <div class="hint-row" id="hintRow" style="display: none;">
+        <button type="button" class="btn-hint" id="btnShowHint">💡 Need a hint?</button>
+        <span class="hint-text" id="hintText" style="display: none;"></span>
+      </div>
+
+      <!-- Multiple Choice 2x2 Options -->
+      <div class="mc-grid" id="mcContainer"></div>
+
+      <!-- Typing Input Area -->
+      <div class="typing-area" id="typingContainer">
+        <input
+          type="text"
+          id="answerInput"
+          class="type-input"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="none"
+          spellcheck="false"
+          placeholder="Type your answer in Spanish..."
+          aria-label="Type your answer in Spanish"
+        />
+        <div class="accent-buttons" role="group" aria-label="Insert Spanish characters">
+          <button type="button" class="accent-btn" data-char="á">á</button>
+          <button type="button" class="accent-btn" data-char="é">é</button>
+          <button type="button" class="accent-btn" data-char="í">í</button>
+          <button type="button" class="accent-btn" data-char="ó">ó</button>
+          <button type="button" class="accent-btn" data-char="ú">ú</button>
+          <button type="button" class="accent-btn" data-char="ñ">ñ</button>
+          <button type="button" class="accent-btn" data-char="¿">¿</button>
+          <button type="button" class="accent-btn" data-char="¡">¡</button>
+        </div>
+      </div>
+
+      <div class="feedback-banner" id="feedbackBanner" role="status" aria-live="polite"></div>
+
+      <div class="action-row">
+        <button type="button" class="btn btn-secondary" id="btnPrev">← Previous</button>
+        <button type="button" class="btn btn-primary" id="btnCheck" style="display: none;">Check Answer</button>
+        <button type="button" class="btn btn-secondary" id="btnReveal">Show Answer</button>
+        <button type="button" class="btn btn-success" id="btnNext">Next →</button>
+      </div>
+
+      <div class="keyboard-tip" id="keyboardTip">
+        Tip: Click an option (or press <kbd>1</kbd>–<kbd>4</kbd>), then press <kbd>Enter</kbd> for the next card.
+      </div>
+    </main>
+
+    <!-- End-of-Deck Summary Screen -->
+    <section class="summary-screen" id="summaryScreen">
+      <h2>¡Excelente! Unit 2 Set Complete!</h2>
+      <p id="summarySubtitle">You finished all cards in this set.</p>
+
+      <div class="summary-score-ring">
+        <span class="big-pct" id="summaryPct">0%</span>
+        <span class="ring-label">First Attempt</span>
+      </div>
+
+      <div class="summary-breakdown">
+        <div class="breakdown-pill" id="summaryFirstTryCount">✅ Correct on 1st attempt: 0</div>
+        <div class="breakdown-pill" id="summaryRetryCount">🔄 Needed extra attempts: 0</div>
+      </div>
+
+      <div class="action-row">
+        <button type="button" class="btn btn-primary" id="btnSummaryPracticeMissed" style="display: none;">
+          🎯 Practice Missed Cards
+        </button>
+        <button type="button" class="btn btn-secondary" id="btnSummaryRestart">
+          ↺ Restart Full Deck
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    /**
+     * ==========================================================================
+     * SPANISH 1 — UNIT 2 (2A & 2B: ME GUSTA MI ESCUELA) DATASET (88 CARDS)
+     * ==========================================================================
+     */
+    const ALL_CARDS = [
+      // ========================================================================
+      // MODE A: CORE VOCABULARY (Unit 2A & 2B) — 46 Cards
+      // ========================================================================
+      { id: 1, mode: "vocab", tag: "2A: Classes", prompt: "schedule", answer: "el horario", accepted: ["horario", "el horario"], distractors: ["la tarea", "el almuerzo", "la clase"] },
+      { id: 2, mode: "vocab", tag: "2A: Classes", prompt: "lunch", answer: "el almuerzo", accepted: ["almuerzo", "el almuerzo"], distractors: ["el horario", "el escritorio", "la mochila"] },
+      { id: 3, mode: "vocab", tag: "2A: Classes", prompt: "homework", answer: "la tarea", accepted: ["tarea", "la tarea"], distractors: ["la carpeta", "la clase", "la prueba"] },
+      { id: 4, mode: "vocab", tag: "2A: Classes", prompt: "art class", answer: "la clase de arte", accepted: ["clase de arte", "la clase de arte"], distractors: ["la clase de ciencias", "la clase de inglés", "la clase de educación física"] },
+      { id: 5, mode: "vocab", tag: "2A: Classes", prompt: "Spanish class", answer: "la clase de español", accepted: ["clase de español", "la clase de español"], distractors: ["la clase de inglés", "la clase de ciencias sociales", "la clase de tecnología"] },
+      { id: 6, mode: "vocab", tag: "2A: Classes", prompt: "science class", answer: "la clase de ciencias naturales", accepted: ["la clase de ciencias", "clase de ciencias", "la clase de ciencias naturales"], distractors: ["la clase de ciencias sociales", "la clase de matemáticas", "la clase de arte"] },
+      { id: 7, mode: "vocab", tag: "2A: Classes", prompt: "social studies class", answer: "la clase de ciencias sociales", accepted: ["clase de ciencias sociales", "la clase de ciencias sociales"], distractors: ["la clase de ciencias naturales", "la clase de español", "la clase de inglés"] },
+      { id: 8, mode: "vocab", tag: "2A: Classes", prompt: "physical education (PE)", answer: "la educación física", accepted: ["educación física", "la educación física", "la clase de educación física"], distractors: ["la tecnología", "las matemáticas", "la tarea"] },
+      { id: 9, mode: "vocab", tag: "2A: Classes", prompt: "English class", answer: "la clase de inglés", accepted: ["clase de inglés", "la clase de inglés"], distractors: ["la clase de español", "la clase de arte", "la clase de tecnología"] },
+      { id: 10, mode: "vocab", tag: "2A: Classes", prompt: "mathematics / math", answer: "las matemáticas", accepted: ["matemáticas", "las matemáticas", "la clase de matemáticas"], distractors: ["las ciencias", "las tijeras", "los lápices"] },
+      { id: 11, mode: "vocab", tag: "2A: Classes", prompt: "technology / computers", answer: "la tecnología", accepted: ["tecnología", "la tecnología", "la clase de tecnología"], distractors: ["la calculadora", "la computadora", "la pantalla"] },
+      { id: 12, mode: "vocab", tag: "2A: Supplies", prompt: "three-ring binder / folder", answer: "la carpeta (de argollas)", accepted: ["la carpeta", "carpeta", "la carpeta de argollas"], distractors: ["la mochila", "la hoja de papel", "la bandera"] },
+      { id: 13, mode: "vocab", tag: "2A: Supplies", prompt: "calculator", answer: "la calculadora", accepted: ["calculadora", "la calculadora"], distractors: ["la computadora", "la carpeta", "la silla"] },
+      { id: 14, mode: "vocab", tag: "2A: Supplies", prompt: "dictionary", answer: "el diccionario", accepted: ["diccionario", "el diccionario"], distractors: ["el escritorio", "el cuaderno", "el reloj"] },
+      { id: 15, mode: "vocab", tag: "2A: Supplies", prompt: "sheet of paper", answer: "la hoja de papel", accepted: ["hoja de papel", "la hoja de papel", "el papel"], distractors: ["la carpeta", "la pantalla", "la puerta"] },
+      { id: 16, mode: "vocab", tag: "2A: Supplies", prompt: "pencil", answer: "el lápiz", accepted: ["lápiz", "el lápiz"], distractors: ["el bolígrafo", "el reloj", "el cartel"] },
+      { id: 17, mode: "vocab", tag: "2A: Supplies", prompt: "pen", answer: "el bolígrafo", accepted: ["bolígrafo", "el bolígrafo", "la pluma"], distractors: ["el lápiz", "el escritorio", "el teclado"] },
+      { id: 18, mode: "vocab", tag: "2A: Descriptions", prompt: "boring", answer: "aburrido / aburrida", accepted: ["aburrido", "aburrida", "aburrido aburrida"], distractors: ["divertido / divertida", "difícil", "interesante"] },
+      { id: 19, mode: "vocab", tag: "2A: Descriptions", prompt: "fun / amusing", answer: "divertido / divertida", accepted: ["divertido", "divertida", "divertido divertida"], distractors: ["aburrido / aburrida", "fácil", "práctico / práctica"] },
+      { id: 20, mode: "vocab", tag: "2A: Descriptions", prompt: "difficult / hard", answer: "difícil", accepted: ["difícil"], distractors: ["fácil", "interesante", "aburrido"] },
+      { id: 21, mode: "vocab", tag: "2A: Descriptions", prompt: "easy", answer: "fácil", accepted: ["fácil"], distractors: ["difícil", "práctico", "favorito"] },
+      { id: 22, mode: "vocab", tag: "2A: Descriptions", prompt: "interesting", answer: "interesante", accepted: ["interesante"], distractors: ["aburrido", "difícil", "práctico"] },
+      { id: 23, mode: "vocab", tag: "2A: Descriptions", prompt: "practical", answer: "práctico / práctica", accepted: ["práctico", "práctica", "práctico práctica"], distractors: ["favorito / favorita", "divertido / divertida", "fácil"] },
+      { id: 24, mode: "vocab", tag: "2A: Questions", prompt: "Who?", answer: "¿Quién?", accepted: ["quién", "quien"], distractors: ["¿Qué?", "¿Dónde?", "¿Cuándo?"] },
+      { id: 25, mode: "vocab", tag: "2A: Useful Words", prompt: "a lot / much", answer: "mucho", accepted: ["mucho"], distractors: ["para", "en", "más"] },
+      { id: 26, mode: "vocab", tag: "2A: Useful Words", prompt: "for / in order to", answer: "para", accepted: ["para"], distractors: ["en", "de", "con"] },
+      { id: 27, mode: "vocab", tag: "2B: Classroom", prompt: "flag", answer: "la bandera", accepted: ["bandera", "la bandera"], distractors: ["la ventana", "la puerta", "la papelera"] },
+      { id: 28, mode: "vocab", tag: "2B: Classroom", prompt: "poster", answer: "el cartel", accepted: ["cartel", "el cartel"], distractors: ["el reloj", "el teclado", "el ratón"] },
+      { id: 29, mode: "vocab", tag: "2B: Classroom", prompt: "computer", answer: "la computadora", accepted: ["computadora", "la computadora"], distractors: ["la calculadora", "la pantalla", "la mochila"] },
+      { id: 30, mode: "vocab", tag: "2B: Classroom", prompt: "backpack / bookbag", answer: "la mochila", accepted: ["mochila", "la mochila"], distractors: ["la carpeta", "la mesa", "la silla"] },
+      { id: 31, mode: "vocab", tag: "2B: Classroom", prompt: "screen", answer: "la pantalla", accepted: ["pantalla", "la pantalla"], distractors: ["la ventana", "la puerta", "la bandera"] },
+      { id: 32, mode: "vocab", tag: "2B: Classroom", prompt: "wastebasket / trash can", answer: "la papelera", accepted: ["papelera", "la papelera"], distractors: ["la carpeta", "la mesa", "la silla"] },
+      { id: 33, mode: "vocab", tag: "2B: Classroom", prompt: "computer mouse", answer: "el ratón", accepted: ["ratón", "el ratón"], distractors: ["el teclado", "el reloj", "el cartel"] },
+      { id: 34, mode: "vocab", tag: "2B: Classroom", prompt: "clock / watch", answer: "el reloj", accepted: ["reloj", "el reloj"], distractors: ["el cartel", "el lápiz", "el escritorio"] },
+      { id: 35, mode: "vocab", tag: "2B: Classroom", prompt: "pencil sharpener", answer: "el sacapuntas", accepted: ["sacapuntas", "el sacapuntas"], distractors: ["el teclado", "el escritorio", "el diccionario"] },
+      { id: 36, mode: "vocab", tag: "2B: Classroom", prompt: "computer keyboard", answer: "el teclado", accepted: ["teclado", "el teclado"], distractors: ["el ratón", "el escritorio", "el cartel"] },
+      { id: 37, mode: "vocab", tag: "2B: Furniture", prompt: "desk", answer: "el escritorio", accepted: ["escritorio", "el escritorio", "el pupitre"], distractors: ["la silla", "la mesa", "el teclado"] },
+      { id: 38, mode: "vocab", tag: "2B: Furniture", prompt: "table", answer: "la mesa", accepted: ["mesa", "la mesa"], distractors: ["la silla", "la puerta", "la ventana"] },
+      { id: 39, mode: "vocab", tag: "2B: Furniture", prompt: "chair", answer: "la silla", accepted: ["silla", "la silla"], distractors: ["la mesa", "la mochila", "la bandera"] },
+      { id: 40, mode: "vocab", tag: "2B: Parts of Room", prompt: "door", answer: "la puerta", accepted: ["puerta", "la puerta"], distractors: ["la ventana", "la pantalla", "la mesa"] },
+      { id: 41, mode: "vocab", tag: "2B: Parts of Room", prompt: "window", answer: "la ventana", accepted: ["ventana", "la ventana"], distractors: ["la puerta", "la bandera", "la pantalla"] },
+      { id: 42, mode: "vocab", tag: "2B: Questions", prompt: "Where?", answer: "¿Dónde?", accepted: ["dónde", "donde"], distractors: ["¿Quién?", "¿Qué?", "¿Cuántos?"] },
+      { id: 43, mode: "vocab", tag: "2B: Useful Words", prompt: "There is / There are", answer: "Hay", accepted: ["hay"], distractors: ["Está", "Están", "Es"] },
+      { id: 44, mode: "vocab", tag: "2B: Useful Words", prompt: "What is this?", answer: "¿Qué es esto?", accepted: ["qué es esto", "que es esto"], distractors: ["¿Dónde está?", "¿Quién es?", "¿Qué hora es?"] },
+      { id: 45, mode: "vocab", tag: "2B: Useful Words", prompt: "of / from", answer: "de", accepted: ["de"], distractors: ["en", "con", "para"] },
+      { id: 46, mode: "vocab", tag: "2B: Useful Words", prompt: "my", answer: "mi / mis", accepted: ["mi", "mis", "mi mis"], distractors: ["tu / tus", "el / la", "un / una"] },
+
+      // ========================================================================
+      // MODE B: ORDINAL NUMBERS (1st - 10th + Gender/Apocopation) — 14 Cards
+      // ========================================================================
+      { id: 47, mode: "ordinal", tag: "Ordinal (1st)", prompt: "first (before a masculine singular noun, e.g., ____ día)", hint: "Drop the -o before a masculine singular noun!", answer: "primer", accepted: ["primer"], distractors: ["primero", "primera", "tercer"] },
+      { id: 48, mode: "ordinal", tag: "Ordinal (1st)", prompt: "first (feminine, e.g., la ____ hora)", hint: "Matches feminine singular 'hora'.", answer: "primera", accepted: ["primera"], distractors: ["primer", "primero", "segunda"] },
+      { id: 49, mode: "ordinal", tag: "Ordinal (2nd)", prompt: "second (masculine / feminine)", answer: "segundo / segunda", accepted: ["segundo", "segunda", "segundo segunda"], distractors: ["tercero / tercera", "sexto / sexta", "séptimo / séptima"] },
+      { id: 50, mode: "ordinal", tag: "Ordinal (3rd)", prompt: "third (before a masculine singular noun, e.g., ____ piso)", hint: "Drop the -o before a masculine singular noun!", answer: "tercer", accepted: ["tercer"], distractors: ["tercero", "tercera", "primer"] },
+      { id: 51, mode: "ordinal", tag: "Ordinal (3rd)", prompt: "third (feminine, e.g., la ____ clase)", answer: "tercera", accepted: ["tercera"], distractors: ["tercer", "tercero", "cuarta"] },
+      { id: 52, mode: "ordinal", tag: "Ordinal (4th)", prompt: "fourth (masculine / feminine)", answer: "cuarto / cuarta", accepted: ["cuarto", "cuarta", "cuarto cuarta"], distractors: ["quinto / quinta", "octavo / octava", "noveno / novena"] },
+      { id: 53, mode: "ordinal", tag: "Ordinal (5th)", prompt: "fifth (masculine / feminine)", answer: "quinto / quinta", accepted: ["quinto", "quinta", "quinto quinta"], distractors: ["cuarto / cuarta", "sexto / sexta", "décimo / décima"] },
+      { id: 54, mode: "ordinal", tag: "Ordinal (6th)", prompt: "sixth (masculine / feminine)", answer: "sexto / sexta", accepted: ["sexto", "sexta", "sexto sexta"], distractors: ["séptimo / séptima", "segundo / segunda", "quinto / quinta"] },
+      { id: 55, mode: "ordinal", tag: "Ordinal (7th)", prompt: "seventh (masculine / feminine)", answer: "séptimo / séptima", accepted: ["séptimo", "séptima", "séptimo séptima"], distractors: ["sexto / sexta", "octavo / octava", "noveno / novena"] },
+      { id: 56, mode: "ordinal", tag: "Ordinal (8th)", prompt: "eighth (masculine / feminine)", answer: "octavo / octava", accepted: ["octavo", "octava", "octavo octava"], distractors: ["noveno / novena", "séptimo / séptima", "cuarto / cuarta"] },
+      { id: 57, mode: "ordinal", tag: "Ordinal (9th)", prompt: "ninth (masculine / feminine)", answer: "noveno / novena", accepted: ["noveno", "novena", "noveno novena"], distractors: ["octavo / octava", "décimo / décima", "segundo / segunda"] },
+      { id: 58, mode: "ordinal", tag: "Ordinal (10th)", prompt: "tenth (masculine / feminine)", answer: "décimo / décima", accepted: ["décimo", "décima", "décimo décima"], distractors: ["noveno / novena", "quinto / quinta", "sexto / sexta"] },
+      { id: 59, mode: "ordinal", tag: "In Context", prompt: "Tengo la clase de matemáticas en la _______ (2nd) hora.", hint: "'hora' is feminine singular.", answer: "segunda", accepted: ["segunda"], distractors: ["segundo", "tercera", "primera"] },
+      { id: 60, mode: "ordinal", tag: "In Context", prompt: "Es mi _______ (1st) día de clases en la escuela.", hint: "'día' is masculine singular!", answer: "primer", accepted: ["primer"], distractors: ["primero", "primera", "tercer"] },
+
+      // ========================================================================
+      // MODE C: LOCATION PREPOSITIONS & ESTAR — 14 Cards
+      // ========================================================================
+      { id: 61, mode: "location", tag: "Preposition", prompt: "next to / beside", answer: "al lado de", accepted: ["al lado de", "al lado"], distractors: ["debajo de", "encima de", "delante de"] },
+      { id: 62, mode: "location", tag: "Preposition", prompt: "there", answer: "allí", accepted: ["allí", "alli"], distractors: ["aquí", "en", "encima de"] },
+      { id: 63, mode: "location", tag: "Preposition", prompt: "here", answer: "aquí", accepted: ["aquí", "aqui"], distractors: ["allí", "detrás de", "debajo de"] },
+      { id: 64, mode: "location", tag: "Preposition", prompt: "underneath / under", answer: "debajo de", accepted: ["debajo de", "debajo"], distractors: ["encima de", "delante de", "al lado de"] },
+      { id: 65, mode: "location", tag: "Preposition", prompt: "in front of", answer: "delante de", accepted: ["delante de", "delante"], distractors: ["detrás de", "debajo de", "encima de"] },
+      { id: 66, mode: "location", tag: "Preposition", prompt: "behind", answer: "detrás de", accepted: ["detrás de", "detrás"], distractors: ["delante de", "al lado de", "encima de"] },
+      { id: 67, mode: "location", tag: "Preposition", prompt: "in / on", answer: "en", accepted: ["en"], distractors: ["de", "para", "aquí"] },
+      { id: 68, mode: "location", tag: "Preposition", prompt: "on top of", answer: "encima de", accepted: ["encima de", "encima"], distractors: ["debajo de", "detrás de", "al lado de"] },
+      { id: 69, mode: "location", tag: "Estar + Contraction", prompt: "La papelera _______ (is) _______ (next to) escritorio. (de + el = del!)", hint: "Singular 'papelera' -> está; de + el -> del.", answer: "está al lado del", accepted: ["está al lado del"], distractors: ["están al lado del", "está al lado de la", "es al lado del"] },
+      { id: 70, mode: "location", tag: "Estar + Location", prompt: "Los libros _______ (are) _______ (on top of) la mesa.", hint: "Plural 'libros' -> están.", answer: "están encima de", accepted: ["están encima de"], distractors: ["está encima de", "están debajo de", "son encima de"] },
+      { id: 71, mode: "location", tag: "Estar + Location", prompt: "La mochila _______ (is) _______ (underneath) la silla.", answer: "está debajo de", accepted: ["está debajo de"], distractors: ["están debajo de", "está encima de", "está delante de"] },
+      { id: 72, mode: "location", tag: "Estar + Contraction", prompt: "El ratón _______ (is) _______ (next to) teclado. (de + el = del!)", hint: "de + el contracts to del.", answer: "está al lado del", accepted: ["está al lado del"], distractors: ["está al lado de la", "están al lado del", "está detrás de"] },
+      { id: 73, mode: "location", tag: "Estar + Location", prompt: "El profesor _______ (is) _______ (in front of) la clase.", answer: "está delante de", accepted: ["está delante de"], distractors: ["está detrás de", "están delante de", "está debajo de"] },
+      { id: 74, mode: "location", tag: "Estar + Location", prompt: "Las ventanas _______ (are) _______ (behind) los escritorios.", hint: "Plural 'ventanas' -> están.", answer: "están detrás de", accepted: ["están detrás de"], distractors: ["está detrás de", "están delante de", "están encima de"] },
+
+      // ========================================================================
+      // MODE D: PLURALS OF NOUNS & ARTICLES — 14 Cards
+      // ========================================================================
+      { id: 75, mode: "plurals", tag: "Plural Article", prompt: "Make plural: el escritorio", hint: "el -> los; ends in vowel -> add -s.", answer: "los escritorios", accepted: ["los escritorios"], distractors: ["las escritorios", "el escritorios", "unos escritorios"] },
+      { id: 76, mode: "plurals", tag: "Plural Article", prompt: "Make plural: la silla", hint: "la -> las; ends in vowel -> add -s.", answer: "las sillas", accepted: ["las sillas"], distractors: ["los sillas", "la sillas", "unas sillas"] },
+      { id: 77, mode: "plurals", tag: "Plural Article", prompt: "Make plural: un cartel", hint: "un -> unos; ends in consonant -> add -es.", answer: "unos carteles", accepted: ["unos carteles"], distractors: ["unas carteles", "unos cartels", "los carteles"] },
+      { id: 78, mode: "plurals", tag: "Plural Article", prompt: "Make plural: una bandera", hint: "una -> unas; ends in vowel -> add -s.", answer: "unas banderas", accepted: ["unas banderas"], distractors: ["unos banderas", "las banderas", "una banderas"] },
+      { id: 79, mode: "plurals", tag: "Ends in -z", prompt: "Make plural: el lápiz", hint: "Nouns ending in -z change z -> c and add -es!", answer: "los lápices", accepted: ["los lápices"], distractors: ["los lápizes", "las lápices", "los lápizs"] },
+      { id: 80, mode: "plurals", tag: "Accent Drop", prompt: "Make plural: el ratón", hint: "Ends in consonant -> add -es and drop the written accent!", answer: "los ratones", accepted: ["los ratones"], distractors: ["los ratónes", "las ratones", "los ratóns"] },
+      { id: 81, mode: "plurals", tag: "Ends in -j", prompt: "Make plural: el reloj", hint: "Ends in consonant -> add -es.", answer: "los relojes", accepted: ["los relojes"], distractors: ["los relojs", "las relojes", "unos relojes"] },
+      { id: 82, mode: "plurals", tag: "Plural Article", prompt: "Make plural: la computadora", answer: "las computadoras", accepted: ["las computadoras"], distractors: ["los computadoras", "unas computadoras", "la computadoras"] },
+      { id: 83, mode: "plurals", tag: "Plural Article", prompt: "Make plural: un diccionario", answer: "unos diccionarios", accepted: ["unos diccionarios"], distractors: ["unas diccionarios", "los diccionarios", "un diccionarios"] },
+      { id: 84, mode: "plurals", tag: "Plural Article", prompt: "Make plural: una mochila", answer: "unas mochilas", accepted: ["unas mochilas"], distractors: ["unos mochilas", "las mochilas", "una mochilas"] },
+      { id: 85, mode: "plurals", tag: "Plural Article", prompt: "Make plural: el teclado", answer: "los teclados", accepted: ["los teclados"], distractors: ["las teclados", "unos teclados", "el teclados"] },
+      { id: 86, mode: "plurals", tag: "Plural Article", prompt: "Make plural: la ventana", answer: "las ventanas", accepted: ["las ventanas"], distractors: ["los ventanas", "unas ventanas", "la ventanas"] },
+      { id: 87, mode: "plurals", tag: "Ends in -s (stays same)", prompt: "Make plural: el sacapuntas", hint: "'sacapuntas' already ends in -s, so only the article changes!", answer: "los sacapuntas", accepted: ["los sacapuntas"], distractors: ["los sacapuntases", "las sacapuntas", "unos sacapuntas"] },
+      { id: 88, mode: "plurals", tag: "Plural Article", prompt: "Make plural: la carpeta", answer: "las carpetas", accepted: ["las carpetas"], distractors: ["los carpetas", "unas carpetas", "la carpetas"] }
+    ];
+
+    const MODE_META = {
+      vocab: {
+        badge: "A. Core Vocab",
+        badgeClass: "mode-vocab",
+        instruction: "Choose or type the Spanish translation (include el / la where shown):"
+      },
+      ordinal: {
+        badge: "B. Ordinal Numbers",
+        badgeClass: "mode-ordinal",
+        instruction: "Select or type the correct Spanish ordinal number form:"
+      },
+      location: {
+        badge: "C. Location & Estar",
+        badgeClass: "mode-location",
+        instruction: "Choose or type the Spanish location phrase:"
+      },
+      plurals: {
+        badge: "D. Plurals & Articles",
+        badgeClass: "mode-plurals",
+        instruction: "Convert both the article and noun into the plural form:"
+      }
+    };
+
+    const state = {
+      activeMode: "ALL",
+      isTypingMode: false,
+      isShuffled: true,
+      practiceMissedOnly: false,
+      deck: [],
+      currentIndex: 0,
+      cardStats: {},
+      currentOptions: [],
+      currentStreak: 0,
+      bestStreak: 0,
+      cardSolvedOnScreen: false
+    };
+
+    const dom = {
+      modeBar: document.getElementById("modeBar"),
+      btnInputMode: document.getElementById("btnInputMode"),
+      btnShuffle: document.getElementById("btnShuffle"),
+      btnPracticeMissed: document.getElementById("btnPracticeMissed"),
+      missedCountBadge: document.getElementById("missedCountBadge"),
+      btnReset: document.getElementById("btnReset"),
+
+      statFirstTryPct: document.getElementById("statFirstTryPct"),
+      statFirstTryFraction: document.getElementById("statFirstTryFraction"),
+      statCompleted: document.getElementById("statCompleted"),
+      statRemaining: document.getElementById("statRemaining"),
+      statStreak: document.getElementById("statStreak"),
+      statBestStreak: document.getElementById("statBestStreak"),
+      statActualScore: document.getElementById("statActualScore"),
+      statActualFraction: document.getElementById("statActualFraction"),
+      progressBarFill: document.getElementById("progressBarFill"),
+      progressBarTrack: document.getElementById("progressBarTrack"),
+
+      flashcardBox: document.getElementById("flashcardBox"),
+      cardModeBadge: document.getElementById("cardModeBadge"),
+      cardTopicBadge: document.getElementById("cardTopicBadge"),
+      cardCounterText: document.getElementById("cardCounterText"),
+      cardAttemptBadge: document.getElementById("cardAttemptBadge"),
+      taskInstruction: document.getElementById("taskInstruction"),
+      promptContainer: document.getElementById("promptContainer"),
+      hintRow: document.getElementById("hintRow"),
+      btnShowHint: document.getElementById("btnShowHint"),
+      hintText: document.getElementById("hintText"),
+      mcContainer: document.getElementById("mcContainer"),
+      typingContainer: document.getElementById("typingContainer"),
+      answerInput: document.getElementById("answerInput"),
+      feedbackBanner: document.getElementById("feedbackBanner"),
+      keyboardTip: document.getElementById("keyboardTip"),
+
+      btnPrev: document.getElementById("btnPrev"),
+      btnCheck: document.getElementById("btnCheck"),
+      btnReveal: document.getElementById("btnReveal"),
+      btnNext: document.getElementById("btnNext"),
+
+      summaryScreen: document.getElementById("summaryScreen"),
+      summarySubtitle: document.getElementById("summarySubtitle"),
+      summaryPct: document.getElementById("summaryPct"),
+      summaryFirstTryCount: document.getElementById("summaryFirstTryCount"),
+      summaryRetryCount: document.getElementById("summaryRetryCount"),
+      btnSummaryPracticeMissed: document.getElementById("btnSummaryPracticeMissed"),
+      btnSummaryRestart: document.getElementById("btnSummaryRestart")
+    };
+
+    function getCardStat(id) {
+      if (!state.cardStats[id]) {
+        state.cardStats[id] = {
+          attempts: 0,
+          firstTryCorrect: null,
+          completed: false,
+          revealed: false,
+          wrongChoices: [],
+          lastInput: ""
+        };
+      }
+      return state.cardStats[id];
+    }
+
+    function normalizeForTyping(str) {
+      return str
+        .trim()
+        .toLowerCase()
+        .replace(/[¿¡?!.,()/—-]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function stripAccents(str) {
+      return str.normalize("NFD").replace(/[̀-ͯ]/g, "");
+    }
+
+    function isTypedMatch(rawUser, card) {
+      const userClean = normalizeForTyping(rawUser);
+      if (!userClean) return { exact: false, accentIssue: false };
+
+      const validAnswers = [card.answer, ...(card.accepted || [])].map(normalizeForTyping);
+
+      if (validAnswers.includes(userClean)) {
+        return { exact: true, accentIssue: false };
+      }
+
+      const userNoAccents = stripAccents(userClean);
+      const hasAccentOnlyDiff = validAnswers.some((ans) => stripAccents(ans) === userNoAccents);
+      return { exact: false, accentIssue: hasAccentOnlyDiff };
+    }
+
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function buildDeck() {
+      let filtered = ALL_CARDS;
+
+      if (state.practiceMissedOnly) {
+        filtered = ALL_CARDS.filter((c) => state.cardStats[c.id]?.firstTryCorrect === false);
+        if (filtered.length === 0) {
+          state.practiceMissedOnly = false;
+          filtered = ALL_CARDS;
+        }
+      } else if (state.activeMode !== "ALL") {
+        filtered = ALL_CARDS.filter((c) => c.mode === state.activeMode);
+      }
+
+      state.deck = state.isShuffled ? shuffleArray(filtered) : [...filtered];
+      state.currentIndex = 0;
+      state.cardSolvedOnScreen = false;
+      hideSummary();
+      renderCurrentCard();
+      updateDashboard();
+    }
+
+    function renderCurrentCard() {
+      if (state.deck.length === 0) return;
+
+      const card = state.deck[state.currentIndex];
+      const st = getCardStat(card.id);
+      const meta = MODE_META[card.mode];
+      state.cardSolvedOnScreen = st.completed;
+
+      dom.flashcardBox.classList.remove("state-correct", "state-incorrect");
+      dom.feedbackBanner.className = "feedback-banner";
+      dom.feedbackBanner.textContent = "";
+
+      dom.cardModeBadge.className = `badge-mode ${meta.badgeClass}`;
+      dom.cardModeBadge.textContent = meta.badge;
+      dom.cardTopicBadge.textContent = card.tag;
+      dom.cardCounterText.textContent = `Card ${state.currentIndex + 1} of ${state.deck.length}`;
+      updateCardBadge(st);
+
+      dom.taskInstruction.textContent = meta.instruction;
+      dom.promptContainer.innerHTML = "";
+      dom.promptContainer.textContent = card.prompt;
+
+      if (card.hint) {
+        dom.hintRow.style.display = "block";
+        dom.btnShowHint.style.display = "inline-block";
+        dom.hintText.style.display = "none";
+        dom.hintText.textContent = card.hint;
+      } else {
+        dom.hintRow.style.display = "none";
+      }
+
+      if (state.isTypingMode) {
+        dom.mcContainer.style.display = "none";
+        dom.typingContainer.classList.add("visible");
+        dom.btnCheck.style.display = "inline-flex";
+        dom.keyboardTip.innerHTML =
+          'Press <kbd>Enter</kbd> to check your answer and <kbd>Enter</kbd> again for the next card.';
+
+        dom.answerInput.classList.remove("input-correct", "input-incorrect");
+        if (st.completed) {
+          dom.answerInput.value = card.answer;
+          dom.answerInput.classList.add("input-correct");
+        } else {
+          dom.answerInput.value = st.lastInput || "";
+        }
+        setTimeout(() => dom.answerInput.focus(), 10);
+      } else {
+        dom.mcContainer.style.display = "grid";
+        dom.typingContainer.classList.remove("visible");
+        dom.btnCheck.style.display = "none";
+        dom.keyboardTip.innerHTML =
+          'Click an option (or press <kbd>1</kbd>–<kbd>4</kbd>), then press <kbd>Enter</kbd> for the next card.';
+
+        const options = shuffleArray([card.answer, ...card.distractors]);
+        state.currentOptions = options;
+        dom.mcContainer.innerHTML = "";
+
+        options.forEach((optText, idx) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "mc-option";
+          btn.dataset.value = optText;
+
+          const keySpan = document.createElement("span");
+          keySpan.className = "mc-key";
+          keySpan.textContent = idx + 1;
+
+          const textSpan = document.createElement("span");
+          textSpan.textContent = optText;
+
+          btn.appendChild(keySpan);
+          btn.appendChild(textSpan);
+
+          if (st.completed) {
+            btn.disabled = true;
+            if (optText === card.answer) {
+              btn.classList.add("opt-correct");
+            }
+          } else if (st.wrongChoices.includes(optText)) {
+            btn.disabled = true;
+            btn.classList.add("opt-wrong");
+          }
+
+          btn.addEventListener("click", () => handleMultipleChoiceSelect(btn, optText));
+          dom.mcContainer.appendChild(btn);
+        });
+      }
+
+      if (st.completed) {
+        dom.flashcardBox.classList.add("state-correct");
+        showFeedback(
+          "success",
+          st.revealed
+            ? `Answer shown: "${card.answer}". Click Next to continue.`
+            : `¡Excelente! "${card.answer}"`
+        );
+      }
+
+      dom.btnPrev.disabled = state.currentIndex === 0;
+      dom.btnNext.textContent =
+        state.currentIndex === state.deck.length - 1 ? "Finish ✓" : "Next →";
+    }
+
+    function handleMultipleChoiceSelect(btnEl, selectedValue) {
+      const card = state.deck[state.currentIndex];
+      const st = getCardStat(card.id);
+      if (st.completed) return;
+
+      if (selectedValue === card.answer) {
+        if (st.firstTryCorrect === null) {
+          st.firstTryCorrect = true;
+          state.currentStreak += 1;
+          if (state.currentStreak > state.bestStreak) {
+            state.bestStreak = state.currentStreak;
+          }
+        }
+        st.attempts += 1;
+        st.completed = true;
+        state.cardSolvedOnScreen = true;
+
+        btnEl.classList.add("opt-correct");
+        document.querySelectorAll(".mc-option").forEach((b) => (b.disabled = true));
+        dom.flashcardBox.classList.remove("state-incorrect");
+        dom.flashcardBox.classList.add("state-correct");
+
+        showFeedback(
+          "success",
+          st.firstTryCorrect
+            ? `¡Muy bien! Correct on your first try: "${card.answer}"`
+            : `¡Correcto! "${card.answer}"`
+        );
+        updateCardBadge(st);
+        updateDashboard();
+      } else {
+        if (st.firstTryCorrect === null) {
+          st.firstTryCorrect = false;
+          state.currentStreak = 0;
+        }
+        st.attempts += 1;
+        if (!st.wrongChoices.includes(selectedValue)) {
+          st.wrongChoices.push(selectedValue);
+        }
+
+        btnEl.classList.add("opt-wrong");
+        btnEl.disabled = true;
+        dom.flashcardBox.classList.add("state-incorrect");
+        showFeedback("error", "Not quite — try another option!");
+        updateCardBadge(st);
+        updateDashboard();
+      }
+    }
+
+    function checkTypedAnswer() {
+      const card = state.deck[state.currentIndex];
+      const st = getCardStat(card.id);
+      const rawUser = dom.answerInput.value;
+
+      if (!rawUser.trim()) {
+        showFeedback("warning", "Please type your answer before checking.");
+        dom.answerInput.focus();
+        return;
+      }
+
+      st.lastInput = rawUser;
+      const result = isTypedMatch(rawUser, card);
+
+      if (result.exact) {
+        if (st.firstTryCorrect === null) {
+          st.firstTryCorrect = true;
+          state.currentStreak += 1;
+          if (state.currentStreak > state.bestStreak) {
+            state.bestStreak = state.currentStreak;
+          }
+        }
+        st.attempts += 1;
+        st.completed = true;
+        state.cardSolvedOnScreen = true;
+
+        dom.answerInput.value = card.answer;
+        dom.answerInput.classList.remove("input-incorrect");
+        dom.answerInput.classList.add("input-correct");
+        dom.flashcardBox.classList.remove("state-incorrect");
+        dom.flashcardBox.classList.add("state-correct");
+
+        showFeedback(
+          "success",
+          st.firstTryCorrect
+            ? `¡Muy bien! Correct on your first attempt: "${card.answer}"`
+            : `¡Correcto! "${card.answer}"`
+        );
+        updateCardBadge(st);
+        updateDashboard();
+        return;
+      }
+
+      if (st.firstTryCorrect === null) {
+        st.firstTryCorrect = false;
+        state.currentStreak = 0;
+      }
+      st.attempts += 1;
+      state.cardSolvedOnScreen = false;
+
+      dom.answerInput.classList.remove("input-correct");
+      dom.answerInput.classList.add("input-incorrect");
+      dom.flashcardBox.classList.remove("state-correct");
+      dom.flashcardBox.classList.add("state-incorrect");
+      updateCardBadge(st);
+      updateDashboard();
+
+      if (result.accentIssue) {
+        showFeedback(
+          "warning",
+          "So close! Check your Spanish accent marks (á, é, í, ó, ú) or ñ and try again."
+        );
+        dom.answerInput.focus();
+        return;
+      }
+
+      showFeedback("error", "Not quite — check spelling, gender agreement, or articles and try again.");
+      dom.answerInput.focus();
+    }
+
+    function revealAnswer() {
+      const card = state.deck[state.currentIndex];
+      const st = getCardStat(card.id);
+
+      if (st.firstTryCorrect === null) {
+        st.firstTryCorrect = false;
+        state.currentStreak = 0;
+      }
+      st.attempts += 1;
+      st.completed = true;
+      st.revealed = true;
+      state.cardSolvedOnScreen = true;
+
+      if (state.isTypingMode) {
+        dom.answerInput.value = card.answer;
+        dom.answerInput.classList.remove("input-incorrect");
+        dom.answerInput.classList.add("input-correct");
+      } else {
+        document.querySelectorAll(".mc-option").forEach((b) => {
+          b.disabled = true;
+          if (b.dataset.value === card.answer) {
+            b.classList.add("opt-correct");
+          }
+        });
+      }
+
+      dom.flashcardBox.classList.remove("state-incorrect");
+      dom.flashcardBox.classList.add("state-correct");
+      showFeedback(
+        "warning",
+        `Answer: "${card.answer}" — Click Next to continue.`
+      );
+      updateCardBadge(st);
+      updateDashboard();
+    }
+
+    function updateCardBadge(st) {
+      if (st.firstTryCorrect === true) {
+        dom.cardAttemptBadge.className = "badge-attempt mastered-first";
+        dom.cardAttemptBadge.textContent = "✓ First Attempt";
+      } else if (st.attempts > 0) {
+        dom.cardAttemptBadge.className = "badge-attempt retry";
+        dom.cardAttemptBadge.textContent = `Attempts: ${st.attempts}`;
+      } else {
+        dom.cardAttemptBadge.className = "badge-attempt first-try";
+        dom.cardAttemptBadge.textContent = "First Attempt";
+      }
+    }
+
+    function showFeedback(type, text) {
+      dom.feedbackBanner.className = `feedback-banner visible ${type}`;
+      dom.feedbackBanner.textContent = text;
+    }
+
+    function goPrev() {
+      if (state.currentIndex > 0) {
+        state.currentIndex -= 1;
+        renderCurrentCard();
+      }
+    }
+
+    function goNext() {
+      if (state.currentIndex < state.deck.length - 1) {
+        state.currentIndex += 1;
+        renderCurrentCard();
+      } else {
+        showSummary();
+      }
+    }
+
+    function showSummary() {
+      dom.flashcardBox.style.display = "none";
+      dom.summaryScreen.classList.add("visible");
+
+      const deckIds = state.deck.map((c) => c.id);
+      const firstTryWins = deckIds.filter(
+        (id) => state.cardStats[id]?.firstTryCorrect === true
+      ).length;
+      const missedCount = deckIds.length - firstTryWins;
+      const pct =
+        deckIds.length > 0 ? Math.round((firstTryWins / deckIds.length) * 100) : 0;
+
+      dom.summaryPct.textContent = `${pct}%`;
+      dom.summarySubtitle.textContent = `You completed all ${deckIds.length} cards in this set.`;
+      dom.summaryFirstTryCount.textContent = `✅ Correct on 1st attempt: ${firstTryWins}`;
+      dom.summaryRetryCount.textContent = `🔄 Needed extra attempts: ${missedCount}`;
+
+      if (missedCount > 0) {
+        dom.btnSummaryPracticeMissed.style.display = "inline-flex";
+        dom.btnSummaryPracticeMissed.textContent = `🎯 Practice ${missedCount} Missed Card${missedCount === 1 ? "" : "s"}`;
+      } else {
+        dom.btnSummaryPracticeMissed.style.display = "none";
+      }
+    }
+
+    function hideSummary() {
+      dom.summaryScreen.classList.remove("visible");
+      dom.flashcardBox.style.display = "block";
+    }
+
+    function updateDashboard() {
+      const allAttemptedIds = Object.keys(state.cardStats).filter(
+        (id) => state.cardStats[id].firstTryCorrect !== null
+      );
+      const firstTryWins = allAttemptedIds.filter(
+        (id) => state.cardStats[id].firstTryCorrect === true
+      ).length;
+      const totalAttempted = allAttemptedIds.length;
+
+      if (totalAttempted === 0) {
+        dom.statFirstTryPct.textContent = "—";
+        dom.statFirstTryFraction.textContent = "0 of 0 attempted";
+      } else {
+        const pct = Math.round((firstTryWins / totalAttempted) * 100);
+        dom.statFirstTryPct.textContent = `${pct}%`;
+        dom.statFirstTryFraction.textContent = `${firstTryWins} of ${totalAttempted} on 1st try`;
+      }
+
+      const deckTotal = state.deck.length;
+      const deckCompleted = state.deck.filter((c) => getCardStat(c.id).completed).length;
+      const remaining = Math.max(0, deckTotal - deckCompleted);
+
+      dom.statCompleted.textContent = `${deckCompleted} / ${deckTotal}`;
+      dom.statRemaining.textContent = `${remaining} remaining`;
+
+      dom.statStreak.textContent = `${state.currentStreak}`;
+      dom.statBestStreak.textContent = `Best: ${state.bestStreak}`;
+
+      const solvedByUserCount = allAttemptedIds.filter(
+        (id) => state.cardStats[id].completed && !state.cardStats[id].revealed
+      ).length;
+
+      if (totalAttempted === 0) {
+        dom.statActualScore.textContent = "—";
+        dom.statActualFraction.textContent = "0 of 0 correct";
+      } else {
+        const actualPct = Math.round((solvedByUserCount / totalAttempted) * 100);
+        dom.statActualScore.textContent = `${actualPct}%`;
+        dom.statActualFraction.textContent = `${solvedByUserCount} of ${totalAttempted} correct`;
+      }
+
+      const progressPct =
+        deckTotal > 0 ? Math.round((deckCompleted / deckTotal) * 100) : 0;
+      dom.progressBarFill.style.width = `${progressPct}%`;
+      dom.progressBarTrack.setAttribute("aria-valuenow", progressPct);
+
+      const totalMissedIds = allAttemptedIds.filter(
+        (id) => state.cardStats[id].firstTryCorrect === false
+      );
+      dom.missedCountBadge.textContent = totalMissedIds.length;
+      if (totalMissedIds.length > 0 && !state.practiceMissedOnly) {
+        dom.btnPracticeMissed.style.display = "inline-block";
+      } else if (totalMissedIds.length === 0) {
+        dom.btnPracticeMissed.style.display = "none";
+      }
+    }
+
+    dom.modeBar.addEventListener("click", (e) => {
+      const btn = e.target.closest(".mode-btn");
+      if (!btn) return;
+      document.querySelectorAll(".mode-btn").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      state.practiceMissedOnly = false;
+      dom.btnPracticeMissed.classList.remove("active-mode");
+      state.activeMode = btn.dataset.mode;
+      buildDeck();
+    });
+
+    dom.btnInputMode.addEventListener("click", () => {
+      state.isTypingMode = !state.isTypingMode;
+      dom.btnInputMode.classList.toggle("active-mode", state.isTypingMode);
+      dom.btnInputMode.textContent = state.isTypingMode
+        ? "⌨️ Mode: Typing"
+        : "🔤 Mode: Multiple Choice";
+      renderCurrentCard();
+    });
+
+    dom.btnShuffle.addEventListener("click", () => {
+      state.isShuffled = !state.isShuffled;
+      dom.btnShuffle.classList.toggle("active-mode", state.isShuffled);
+      dom.btnShuffle.textContent = state.isShuffled ? "🔀 Shuffle: On" : "🔀 Shuffle: Off";
+      buildDeck();
+    });
+
+    dom.btnPracticeMissed.addEventListener("click", () => {
+      state.practiceMissedOnly = !state.practiceMissedOnly;
+      dom.btnPracticeMissed.classList.toggle("active-mode", state.practiceMissedOnly);
+      buildDeck();
+    });
+
+    dom.btnSummaryPracticeMissed.addEventListener("click", () => {
+      state.practiceMissedOnly = true;
+      dom.btnPracticeMissed.classList.add("active-mode");
+      buildDeck();
+    });
+
+    function resetAll() {
+      state.cardStats = {};
+      state.currentStreak = 0;
+      state.bestStreak = 0;
+      state.practiceMissedOnly = false;
+      dom.btnPracticeMissed.classList.remove("active-mode");
+      buildDeck();
+    }
+
+    dom.btnReset.addEventListener("click", resetAll);
+    dom.btnSummaryRestart.addEventListener("click", resetAll);
+
+    dom.btnShowHint.addEventListener("click", () => {
+      dom.btnShowHint.style.display = "none";
+      dom.hintText.style.display = "inline-block";
+    });
+
+    document.querySelectorAll(".accent-btn").forEach((btn) => {
+      btn.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        const char = btn.dataset.char;
+        const start = dom.answerInput.selectionStart ?? dom.answerInput.value.length;
+        const end = dom.answerInput.selectionEnd ?? dom.answerInput.value.length;
+        dom.answerInput.value =
+          dom.answerInput.value.slice(0, start) + char + dom.answerInput.value.slice(end);
+        dom.answerInput.focus();
+        dom.answerInput.setSelectionRange(start + 1, start + 1);
+      });
+    });
+
+    dom.btnPrev.addEventListener("click", goPrev);
+    dom.btnCheck.addEventListener("click", checkTypedAnswer);
+    dom.btnReveal.addEventListener("click", revealAnswer);
+    dom.btnNext.addEventListener("click", goNext);
+
+    document.addEventListener("keydown", (e) => {
+      if (dom.summaryScreen.classList.contains("visible")) return;
+
+      if (e.key === "Enter") {
+        e.preventDefault();
+        if (state.isTypingMode) {
+          if (state.cardSolvedOnScreen) {
+            goNext();
+          } else {
+            checkTypedAnswer();
+          }
+        } else if (state.cardSolvedOnScreen) {
+          goNext();
+        }
+        return;
+      }
+
+      if (!state.isTypingMode && ["1", "2", "3", "4"].includes(e.key)) {
+        const idx = parseInt(e.key, 10) - 1;
+        const buttons = dom.mcContainer.querySelectorAll(".mc-option");
+        if (buttons[idx] && !buttons[idx].disabled) {
+          buttons[idx].click();
+        }
+      }
+    });
+
+    buildDeck();
+  </script>
+</body>
+</html>
